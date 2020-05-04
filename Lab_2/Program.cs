@@ -4,32 +4,134 @@ namespace Lab_2
 {
     public class Program
     {
-        static void Way(char a)
+
+        static void zavdannia1()
+        {
+            Console.WriteLine("Введiть номер маршруту.");
+            int marshrut;
+            marshrut = int.Parse(Console.ReadLine());
+            Way(marshrut);
+        }
+        static void zavdannia2()
+        {
+            double a, b, dx;
+            Console.WriteLine("Введiть перше значення.");
+            a = double.Parse(Console.ReadLine());
+            Console.WriteLine("Введiть друге значення.");
+            b = double.Parse(Console.ReadLine());
+            Console.WriteLine("Введiть крок.");
+            dx = double.Parse(Console.ReadLine());
+            Function(a, b, dx);
+        }
+        static void zavdannia3()
+        {
+            Console.WriteLine("Бажаєте виконати програму вводячи масив iз клавiатури?(введiть 0) Чи заповнити масив псевдовипадковими числами?(введiть - 1)");
+            int c;
+            c = int.Parse(Console.ReadLine());
+            if (c == 0)
+            {
+                const int n = 6;
+                Console.WriteLine("Введiть числа для заповнення масиву:");
+                int[] masiv = new int[n];
+                for (int i = 0; i < n; i++)
+                {
+                    Console.Write("a[{0:D}]: ", i);
+                    masiv[i] = int.Parse(Console.ReadLine());
+                }
+                maxElement(masiv);
+                suma(masiv);
+            }
+            else if (c == 1)
+            {
+                const int l = 6;
+                int[] mas = new int[l];
+                randomArray(mas);
+                maxElement(mas);
+                suma(mas);
+            }
+
+        }
+        static void zavdannia5()
+        {
+            Console.WriteLine("Бажаєте виконати програму вводячи матрицю iз клавiатури?(введiть 0) Чи заповнити матрицю псевдовипадковими числами?(введiть - 1)");
+            int key;
+            key = int.Parse(Console.ReadLine());
+            if (key == 0)
+            {
+                const int n = 4, m = 5;
+                int[,] matrica = new int[n, m];
+                Matrica(matrica);
+                sumMaxElLine(matrica);
+            }
+            if (key == 1)
+            {
+                const int n = 4, m = 5;
+                int[,] rmatrica = new int[n, m];
+                randomMatrica(rmatrica);
+                sumMaxElLine(rmatrica);
+            } 
+        }
+        static void Way(int a)
         {
             switch (a)
             {
-                case '1': Console.WriteLine("Початкова зупинка маршруту №1 - Залiзничний вокзал, кiнцева зупинка - вул. Пасiчна."); break;
-                case '2': Console.WriteLine("Початкова зупинка маршруту №2 - вул. Пасiчна, кiнцева зупинка - вул. Коновальця(Музей Труша)."); break;
-                case '3': Console.WriteLine("Початкова зупинка маршруту №3 - пл. Соборна, кiнцева зупинка - Аквапарк."); break;
-                case '4': Console.WriteLine("Початкова зупинка маршруту №4 - Залiзничний вокзал, кiнцева зупинка - вул. Вернадського."); break;
-                case '5': Console.WriteLine("Початкова зупинка маршруту №5 - вул. Миколайчука, кiнцева зупинка - вул. Коновальця."); break;
-                case '6': Console.WriteLine("Початкова зупинка маршруту №6 - вул. Миколайчука, кiнцева зупинка - вул. Клепарiвська."); break;
-                case '7': Console.WriteLine("Початкова зупинка маршруту №7 - Погулянка, кiнцева зупинка - Церква святої Анни."); break;
-                case '8': Console.WriteLine("Початкова зупинка маршруту №8 - пл. Соборна, кiнцева зупинка - вул. Вернадського."); break;
-                case '9': Console.WriteLine("Початкова зупинка маршруту №9 - Залiзничний вокзал, кiнцева зупинка - вул. Торф'яна."); break;
+                case 1: Console.WriteLine("Початкова зупинка маршруту №1 - Залiзничний вокзал, кiнцева зупинка - вул. Пасiчна."); break;
+                case 2: Console.WriteLine("Початкова зупинка маршруту №2 - вул. Пасiчна, кiнцева зупинка - вул. Коновальця(Музей Труша)."); break;
+                case 3: Console.WriteLine("Початкова зупинка маршруту №3 - пл. Соборна, кiнцева зупинка - Аквапарк."); break;
+                case 4: Console.WriteLine("Початкова зупинка маршруту №4 - Залiзничний вокзал, кiнцева зупинка - вул. Вернадського."); break;
+                case 5: Console.WriteLine("Початкова зупинка маршруту №5 - вул. Миколайчука, кiнцева зупинка - вул. Коновальця."); break;
+                case 6: Console.WriteLine("Початкова зупинка маршруту №6 - вул. Миколайчука, кiнцева зупинка - вул. Клепарiвська."); break;
+                case 7: Console.WriteLine("Початкова зупинка маршруту №7 - Погулянка, кiнцева зупинка - Церква святої Анни."); break;
+                case 8: Console.WriteLine("Початкова зупинка маршруту №8 - пл. Соборна, кiнцева зупинка - вул. Вернадського."); break;
+                case 9: Console.WriteLine("Початкова зупинка маршруту №9 - Залiзничний вокзал, кiнцева зупинка - вул. Торф'яна."); break;
+                default: Console.WriteLine("Виникла помилка, такого маршруту не iснує."); break;
             }
 
         }
         static void Function(double a, double b, double dx)
         {
-            double y;
+            double y, c = a;
+            Console.WriteLine("Результат обчислень, використовуючи оператори циклу з передумовою:");
             Console.WriteLine("__________________________________\n|        x        |       y      |\n");
             while (a <= b)
             {
-                y = Math.Log(a);
-                Console.WriteLine("----------------------------------\n|       {0:F2}      |     {1:F2}     |\n", a, y);
+                if (a == 0)
+                {
+                    Console.WriteLine("----------------------------------\n|       {0:F2}      |     -Нескінченність     |\n", a);
+                }
+                else if (a < 0)
+                {
+                    Console.WriteLine("----------------------------------\n|       {0:F2}      |     Помилка!     |\n", a);
+                }
+                else
+                {
+                    y = Math.Log(a);
+                    Console.WriteLine("----------------------------------\n|       {0:F2}      |     {1:F2}     |\n", a, y);
+                }
                 a += dx;
+                
             }
+            a = c;
+            Console.WriteLine("Результат обчислень, використовуючи оператори циклу з післяумовою:");
+            Console.WriteLine("__________________________________\n|        x        |       y      |\n");
+            do
+            {
+                if (a == 0)
+                {
+                    Console.WriteLine("----------------------------------\n|       {0:F2}      |     -Нескінченність     |\n", a);
+                }
+                else if (a < 0)
+                {
+                    Console.WriteLine("----------------------------------\n|       {0:F2}      |     Помилка!     |\n", a);
+                }
+                else
+                {
+                    y = Math.Log(a);
+                    Console.WriteLine("----------------------------------\n|       {0:F2}      |     {1:F2}     |\n", a, y);
+                }
+                a += dx;
+
+            } while (a <= b);
         }
 
         static public int suma(int[] arr)
@@ -140,69 +242,19 @@ namespace Lab_2
             k = int.Parse(Console.ReadLine());
             if (k == 1)
             {
-                Console.WriteLine("Введiть номер маршруту.");
-                char marshrut;
-                marshrut = (char)Console.Read();
-                Way(marshrut);
+                zavdannia1();
             }
             else if (k == 2)
             {
-                double a, b, dx;
-                Console.WriteLine("Введiть перше значення.");
-                a = double.Parse(Console.ReadLine());
-                Console.WriteLine("Введiть друге значення.");
-                b = double.Parse(Console.ReadLine());
-                Console.WriteLine("Введiть крок.");
-                dx = double.Parse(Console.ReadLine());
-                Function(a, b, dx);
+                zavdannia2();
             }
             else if (k == 3)
             {
-                Console.WriteLine("Бажаєте виконати програму вводячи масив iз клавiатури?(введiть 0) Чи заповнити масив псевдовипадковими числами?(введiть - 1)");
-                int c;
-                c = int.Parse(Console.ReadLine());
-                if (c == 0)
-                {
-                    const int n = 6;
-                    Console.WriteLine("Введiть числа для заповнення масиву:");
-                    int[] masiv = new int[n];
-                    for (int i = 0; i < n; i++)
-                    {
-                        Console.Write("a[{0:D}]: ", i);
-                        masiv[i] = int.Parse(Console.ReadLine());
-                    }
-                    maxElement(masiv);
-                    suma(masiv);
-                }
-                else if (c == 1)
-                {
-                    const int l = 6;
-                    int[] mas = new int[l];
-                    randomArray(mas);
-                    maxElement(mas);
-                    suma(mas);
-                }
-
+                zavdannia3();
             }
             else if (k == 5)
             {
-                Console.WriteLine("Бажаєте виконати програму вводячи матрицю iз клавiатури?(введiть 0) Чи заповнити матрицю псевдовипадковими числами?(введiть - 1)");
-                int key;
-                key = int.Parse(Console.ReadLine());
-                if (key == 0)
-                {
-                    const int n = 4, m = 5;
-                    int[,] matrica = new int[n, m];
-                    Matrica(matrica);
-                    sumMaxElLine(matrica);
-                }
-                if (key == 1)
-                {
-                    const int n = 4, m = 5;
-                    int[,] rmatrica = new int[n, m];
-                    randomMatrica(rmatrica);
-                    sumMaxElLine(rmatrica);
-                }
+                zavdannia5();
             }
         }
     }
